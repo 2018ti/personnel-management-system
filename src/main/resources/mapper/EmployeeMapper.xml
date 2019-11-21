@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.com.pms.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.com.pms.po.Employee">
+    <id column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+    <result column="e_sex" jdbcType="VARCHAR" property="eSex" />
+    <result column="e_birthday" jdbcType="DATE" property="eBirthday" />
+    <result column="e_entryDate" jdbcType="DATE" property="eEntrydate" />
+    <result column="e_departmentid" jdbcType="INTEGER" property="eDepartmentid" />
+    <result column="e_salarylevel" jdbcType="INTEGER" property="eSalarylevel" />
+    <result column="e_firewarning" jdbcType="VARCHAR" property="eFirewarning" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    e_id, e_name, e_sex, e_birthday, e_entryDate, e_departmentid, e_salarylevel, e_firewarning
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.com.pms.po.Employee">
+    insert into employee (e_id, e_name, e_sex, 
+      e_birthday, e_entryDate, e_departmentid, 
+      e_salarylevel, e_firewarning)
+    values (#{eId,jdbcType=INTEGER}, #{eName,jdbcType=VARCHAR}, #{eSex,jdbcType=VARCHAR}, 
+      #{eBirthday,jdbcType=DATE}, #{eEntrydate,jdbcType=DATE}, #{eDepartmentid,jdbcType=INTEGER}, 
+      #{eSalarylevel,jdbcType=INTEGER}, #{eFirewarning,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.com.pms.po.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="eName != null">
+        e_name,
+      </if>
+      <if test="eSex != null">
+        e_sex,
+      </if>
+      <if test="eBirthday != null">
+        e_birthday,
+      </if>
+      <if test="eEntrydate != null">
+        e_entryDate,
+      </if>
+      <if test="eDepartmentid != null">
+        e_departmentid,
+      </if>
+      <if test="eSalarylevel != null">
+        e_salarylevel,
+      </if>
+      <if test="eFirewarning != null">
+        e_firewarning,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="eName != null">
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eSex != null">
+        #{eSex,jdbcType=VARCHAR},
+      </if>
+      <if test="eBirthday != null">
+        #{eBirthday,jdbcType=DATE},
+      </if>
+      <if test="eEntrydate != null">
+        #{eEntrydate,jdbcType=DATE},
+      </if>
+      <if test="eDepartmentid != null">
+        #{eDepartmentid,jdbcType=INTEGER},
+      </if>
+      <if test="eSalarylevel != null">
+        #{eSalarylevel,jdbcType=INTEGER},
+      </if>
+      <if test="eFirewarning != null">
+        #{eFirewarning,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.com.pms.po.Employee">
+    update employee
+    <set>
+      <if test="eName != null">
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eSex != null">
+        e_sex = #{eSex,jdbcType=VARCHAR},
+      </if>
+      <if test="eBirthday != null">
+        e_birthday = #{eBirthday,jdbcType=DATE},
+      </if>
+      <if test="eEntrydate != null">
+        e_entryDate = #{eEntrydate,jdbcType=DATE},
+      </if>
+      <if test="eDepartmentid != null">
+        e_departmentid = #{eDepartmentid,jdbcType=INTEGER},
+      </if>
+      <if test="eSalarylevel != null">
+        e_salarylevel = #{eSalarylevel,jdbcType=INTEGER},
+      </if>
+      <if test="eFirewarning != null">
+        e_firewarning = #{eFirewarning,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.com.pms.po.Employee">
+    update employee
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_sex = #{eSex,jdbcType=VARCHAR},
+      e_birthday = #{eBirthday,jdbcType=DATE},
+      e_entryDate = #{eEntrydate,jdbcType=DATE},
+      e_departmentid = #{eDepartmentid,jdbcType=INTEGER},
+      e_salarylevel = #{eSalarylevel,jdbcType=INTEGER},
+      e_firewarning = #{eFirewarning,jdbcType=VARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+</mapper>

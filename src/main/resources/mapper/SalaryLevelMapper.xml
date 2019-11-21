@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.com.pms.mapper.SalaryLevelMapper">
+  <resultMap id="BaseResultMap" type="com.com.pms.po.SalaryLevel">
+    <id column="salary_level" jdbcType="INTEGER" property="salaryLevel" />
+    <result column="base_salary" jdbcType="DOUBLE" property="baseSalary" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    salary_level, base_salary
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salarylevel
+    where salary_level = #{salaryLevel,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salarylevel
+    where salary_level = #{salaryLevel,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.com.pms.po.SalaryLevel">
+    insert into salarylevel (salary_level, base_salary)
+    values (#{salaryLevel,jdbcType=INTEGER}, #{baseSalary,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.com.pms.po.SalaryLevel">
+    insert into salarylevel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salaryLevel != null">
+        salary_level,
+      </if>
+      <if test="baseSalary != null">
+        base_salary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salaryLevel != null">
+        #{salaryLevel,jdbcType=INTEGER},
+      </if>
+      <if test="baseSalary != null">
+        #{baseSalary,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.com.pms.po.SalaryLevel">
+    update salarylevel
+    <set>
+      <if test="baseSalary != null">
+        base_salary = #{baseSalary,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where salary_level = #{salaryLevel,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.com.pms.po.SalaryLevel">
+    update salarylevel
+    set base_salary = #{baseSalary,jdbcType=DOUBLE}
+    where salary_level = #{salaryLevel,jdbcType=INTEGER}
+  </update>
+</mapper>
