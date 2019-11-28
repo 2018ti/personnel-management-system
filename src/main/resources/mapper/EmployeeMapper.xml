@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.com.pms.mapper.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.com.pms.po.Employee">
+<mapper namespace="com.pms.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.pms.po.Employee">
     <id column="e_id" jdbcType="INTEGER" property="eId" />
     <result column="e_name" jdbcType="VARCHAR" property="eName" />
     <result column="e_sex" jdbcType="VARCHAR" property="eSex" />
@@ -20,11 +20,16 @@
     from employee
     where e_id = #{eId,jdbcType=INTEGER}
   </select>
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+     from employee
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where e_id = #{eId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.com.pms.po.Employee">
+  <insert id="insert" parameterType="com.pms.po.Employee">
     insert into employee (e_id, e_name, e_sex, 
       e_birthday, e_entryDate, e_departmentid, 
       e_salarylevel, e_firewarning)
@@ -32,7 +37,7 @@
       #{eBirthday,jdbcType=DATE}, #{eEntrydate,jdbcType=DATE}, #{eDepartmentid,jdbcType=INTEGER}, 
       #{eSalarylevel,jdbcType=INTEGER}, #{eFirewarning,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.com.pms.po.Employee">
+  <insert id="insertSelective" parameterType="com.pms.po.Employee">
     insert into employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="eId != null">
@@ -87,7 +92,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.com.pms.po.Employee">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pms.po.Employee">
     update employee
     <set>
       <if test="eName != null">
@@ -114,7 +119,7 @@
     </set>
     where e_id = #{eId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.com.pms.po.Employee">
+  <update id="updateByPrimaryKey" parameterType="com.pms.po.Employee">
     update employee
     set e_name = #{eName,jdbcType=VARCHAR},
       e_sex = #{eSex,jdbcType=VARCHAR},

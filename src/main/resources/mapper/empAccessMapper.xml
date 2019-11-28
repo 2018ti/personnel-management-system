@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.com.pms.mapper.empAccessMapper">
-  <resultMap id="BaseResultMap" type="com.com.pms.po.empAccess">
+<mapper namespace="com.pms.mapper.empAccessMapper">
+  <resultMap id="BaseResultMap" type="com.pms.po.empAccess">
     <id column="e_id" jdbcType="INTEGER" property="eId" />
     <id column="a_id" jdbcType="INTEGER" property="aId" />
     <id column="access_date" jdbcType="DATE" property="accessDate" />
@@ -11,7 +11,7 @@
   <sql id="Base_Column_List">
     e_id, a_id, access_date, score, manager_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="com.com.pms.po.empAccessKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.pms.po.empAccessKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from emp_access
@@ -19,19 +19,19 @@
       and a_id = #{aId,jdbcType=INTEGER}
       and access_date = #{accessDate,jdbcType=DATE}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.com.pms.po.empAccessKey">
+  <delete id="deleteByPrimaryKey" parameterType="com.pms.po.empAccessKey">
     delete from emp_access
     where e_id = #{eId,jdbcType=INTEGER}
       and a_id = #{aId,jdbcType=INTEGER}
       and access_date = #{accessDate,jdbcType=DATE}
   </delete>
-  <insert id="insert" parameterType="com.com.pms.po.empAccess">
+  <insert id="insert" parameterType="com.pms.po.empAccess">
     insert into emp_access (e_id, a_id, access_date, 
       score, manager_id)
     values (#{eId,jdbcType=INTEGER}, #{aId,jdbcType=INTEGER}, #{accessDate,jdbcType=DATE}, 
       #{score,jdbcType=DOUBLE}, #{managerId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.com.pms.po.empAccess">
+  <insert id="insertSelective" parameterType="com.pms.po.empAccess">
     insert into emp_access
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="eId != null">
@@ -68,7 +68,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.com.pms.po.empAccess">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pms.po.empAccess">
     update emp_access
     <set>
       <if test="score != null">
@@ -82,7 +82,7 @@
       and a_id = #{aId,jdbcType=INTEGER}
       and access_date = #{accessDate,jdbcType=DATE}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.com.pms.po.empAccess">
+  <update id="updateByPrimaryKey" parameterType="com.pms.po.empAccess">
     update emp_access
     set score = #{score,jdbcType=DOUBLE},
       manager_id = #{managerId,jdbcType=INTEGER}
