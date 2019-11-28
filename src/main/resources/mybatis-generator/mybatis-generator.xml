@@ -2,40 +2,135 @@
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
 <generatorConfiguration>
-    <context id="DB2Tables"    targetRuntime="MyBatis3">
-        <commentGenerator>
-            <property name="suppressDate" value="true"/>
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
-        <!--数据库链接地址账号密码-->
-        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/pms?serverTimezone=UTC&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" driverClass="com.mysql.jdbc.Driver" password="ls19990121" userId="root" />
-    <javaTypeResolver>
-            <property name="forceBigDecimals" value="false"/>
-        </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.pms.po"
-                            targetProject="src/main/java">
-            <property name="enableSubPackages" value="false" />
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <!--
+    id 此上下文的唯一标识符。该值将在某些错误消息中使用。
+    targetRuntime:此属性用于为生成的代码指定运行时目标。该属性支持以下特殊值：MyBatis3,MyBatis3Simple
+    -->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--
+            配置连接数据库需要的属性值
+        -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://49.234.9.177:3306/grouptask"
+                        userId="root"
+                        password="3468989340">
+        </jdbcConnection>
+
+        <!--<javaTypeResolver >-->
+        <!--<property name="forceBigDecimals" value="false" />-->
+        <!--</javaTypeResolver>-->
+
+        <!--
+            <javaModelGenerator>元素用于定义Java模型生成器的属性。Java模型生成器将构建与自省表匹配的主键类，记录类和“按示例查询”类。此元素是<context>元素的必需子元素。
+            targetPackage:This is the package where the generated classes will be placed.
+            targetProject:This is used to specify a target project for the generated objects.
+        -->
+        <javaModelGenerator targetPackage="com.pms.po" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
+
+        <!--
+            配置sqlMapper存放的位置等一些配置
+        -->
+<!--        <sqlMapGenerator targetPackage="com.lancer.mapper"  targetProject=".\src\main\java">-->
+<!--            <property name="enableSubPackages" value="true" />-->
+<!--        </sqlMapGenerator>-->
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.pms.mapper"
-                             targetProject="src/main/java"
-                             type="XMLMAPPER">
-            <property name="enableSubPackages" value="false" />
+        <!--
+            配置sql的接口文件
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.pms.mapper"  targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <!--生成对应表及类名-->
-        <table tableName="accessment" domainObjectName="Accessment" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="department" domainObjectName="Department" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="emp_access" domainObjectName="empAccess" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="employee" domainObjectName="Employee" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="manager" domainObjectName="Manager" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="salary" domainObjectName="Salary" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="salarylevel" domainObjectName="SalaryLevel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="trfalseue" selectByExampleQueryId="false"></table>
+
+        <!--<table tableName="test" domainObjectName="Test" >-->
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--<generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
+        <!--<columnOverride column="DATE_FIELD" property="startDate" />-->
+        <!--<ignoreColumn column="FRED" />-->
+        <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+
+        <!--
+            需要生成的表名，以及映射到哪个类的类名
+            中间还可以进行一些其他的配置
+        -->
+        <table tableName="accessment" domainObjectName="Accessment" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+        <table tableName="department" domainObjectName="Department" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+        <table tableName="emp_access" domainObjectName="empAccess" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+        <table tableName="employee" domainObjectName="Employee" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+
+        <table tableName="empwarning" domainObjectName="Empwarining" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+
+        <table tableName="manager" domainObjectName="Manager" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+        <table tableName="salary" domainObjectName="Salary" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+        <table tableName="salarylevel" domainObjectName="SalaryLevel" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+
     </context>
 </generatorConfiguration>

@@ -1,23 +1,38 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pms?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
-    password: ls19990121
-    dataSource:
-      type: com.alibaba.druid.pool.DruidDataSource
-  mvc:
-    view:
-      prefix: /
-      suffix: .html
+    password: 3468989340
+    url: jdbc:mysql://49.234.9.177:3306/grouptask
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    druid:
+      url: jdbc:mysql://49.234.9.177:3306/grouptask
+      username: root
+      password: 3468989340
+
+      # WebStatFilter配置
+      web-stat-filter:
+        #        启用
+        enabled: true
+        #        开启过滤规则
+        url-pattern: /*
+        # 忽略过滤的格式
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+
+      # StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        # 访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: /druid/*
+        # 需要账号密码才能访问控制台
+        login-username: druid
+        login-password: druid123
+          # IP白名单
+          # allow: 127.0.0.1
+          #　IP黑名单（共同存在时，deny优先于allow）
+          # deny: 192.168.1.218
+
 mybatis:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: mybatis/**/*Mapper.xml
   configuration:
     map-underscore-to-camel-case: true
-pagehelper:
-    helper-dialect: mysql
-    reasonable: true
-    support-methods-arguments: true
-    params: count=countSql
-
-
