@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/login.css" th:href="@{/css/login.css}"/>
+    <style>
+        body{
+            background-image: url("img/bj.jpg");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<div id="login">
+    <h1>小型人事管理系统</h1>
+    <h2>Login</h2>
+    <form>
+        <input type="text" required="required" placeholder="用户名" name="username"></input>
+        <input type="password" required="required" placeholder="密码" name="password"></input>
+        验证码:  <input type="text" placeholder="请输入验证码" name="verifyCodeActual">
+        <div class="item-input">
+            <img id="captcha_img" alt="点击更换" title="点击更换"
+                 onclick="refresh()" src="/kaptcha" />
+        </div>
+        <button class="but" type="button" onclick="tologin()">登录</button>
+        <a href = "http://localhost:63342/%E5%B0%8F%E5%9E%8B%E4%BA%BA%E4%BA%8B%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/forgetPassword.html?_ijt=di60hrhc0tu0c8ggp169getmn9" style = "padding:0px 0px 0px 18px">忘记密码？</a>
+    </form>
+</div>
+
+
+<script>
+    function tologin() {
+        var xmlRequest=new XMLHttpRequest();
+        var username=$("input[name='username']").val();
+        var password = $("input[name='password']").val();
+        var verifyCodeActual=$("input[name='verifyCodeActual']").val();
+        $.ajax({
+            url: "/login",
+            type: "post",
+            dataType: "json",
+            data:{
+                "username": username,
+                "password": password,
+                "verifyCodeActual":verifyCodeActual
+            },
+            success:function(r) {
+                console.log("world");
+                if (r.code==0){
+                    // alert("hello");
+                    console.log("hello");
+                    location.href= "/success";
+                }else {
+                    alert(r.msg);
+                }
+            }
+        });
+        return false;
+    }
+
+    function refresh() {
+        document.getElementById('captcha_img').src="/kaptcha?"+Math.random();
+    }
+</script>
+</body>
+</html>

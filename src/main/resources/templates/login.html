@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function refresh() {
+            document.getElementById('captcha_img').src="/kaptcha?"+Math.random();
+        }
+    </script>
+</head>
+<body>
+
+<form>
+    姓名:<input type="text" placeholder="Id" name="id"><br/>
+    密码:<input type="password" placeholder="password" name="password"><br>
+    验证码:  <input type="text" placeholder="请输入验证码" name="verifyCodeActual">
+    <div class="item-input">
+        <img id="captcha_img" alt="点击更换" title="点击更换"
+             onclick="refresh()" src="/kaptcha" />
+    </div>
+    <input type="button" value="submit" onclick="tologin()">
+</form>
+<script>
+    function tologin() {
+        var xmlRequest=new XMLHttpRequest();
+        var username=$("input[name='id']").val();
+        var password = $("input[name='password']").val();
+        var verifyCodeActual=$("input[name='verifyCodeActual']").val();
+        $.ajax({
+            url: "/login",
+            type: "post",
+            dataType: "json",
+            data:{
+                "username": username,
+                "password": password,
+                "verifyCodeActual":verifyCodeActual
+            },
+            success:function(r) {
+                console.log("world");
+                if (r.code==0){
+                    // alert("hello");
+                    console.log("hello");
+                    location.href= "/success";
+                }else {
+                    alert(r.msg);
+                }
+            }
+        });
+        return false;
+    }
+
+
+
+</script>
+</body>
+</html>

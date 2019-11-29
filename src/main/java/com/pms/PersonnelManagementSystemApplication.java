@@ -30,19 +30,19 @@ public class PersonnelManagementSystemApplication {
         return new com.alibaba.druid.pool.DruidDataSource();
     }
 
-    /**
-     * 提供sqlsessionfactory
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
-        return sqlSessionFactoryBean.getObject();
-    }
+//    /**
+//     * 提供sqlsessionfactory
+//     * @return
+//     * @throws Exception
+//     */
+//    @Bean
+//    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setDataSource(dataSource());
+//        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+//        return sqlSessionFactoryBean.getObject();
+//    }
 
 
     @Bean
