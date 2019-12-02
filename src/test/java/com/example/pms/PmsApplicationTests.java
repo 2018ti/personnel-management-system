@@ -1,5 +1,6 @@
 package com.example.pms;
 
+import com.github.pagehelper.PageInfo;
 import com.pms.PersonnelManagementSystemApplication;
 import com.pms.dto.EmployeeTestResult;
 import com.pms.mapper.EmpwariningMapper;
@@ -106,5 +107,11 @@ public class PmsApplicationTests {
         Employee employee = employeeService.selectByEId(1);
         employee.setE_firewarning("警告");
         employeeService.updateEmp(employee);
+    }
+
+    @Test
+    public void test06(){
+        PageInfo pageInfo=employeeService.listAll(1,2);
+
     }
 }

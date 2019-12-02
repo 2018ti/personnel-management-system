@@ -29,10 +29,10 @@ public class Login {
     @ResponseBody
     public ResponseBo postlogin(String username, String password, HttpServletRequest request){
 
-        if (!CodeUtil.checkVerifyCode(request)) {
-//            request.setAttribute("codeErr", "验证码有误!");
-            return ResponseBo.error("验证码错误");
-        }
+//        if (!CodeUtil.checkVerifyCode(request)) {
+////            request.setAttribute("codeErr", "验证码有误!");
+//            return ResponseBo.error("验证码错误");
+//        }
 
         System.out.println(username+" "+password);
         Subject subject = SecurityUtils.getSubject();

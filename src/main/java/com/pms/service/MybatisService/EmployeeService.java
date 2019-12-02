@@ -1,6 +1,8 @@
 package com.pms.service.MybatisService;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pms.mapper.EmployeeMapper;
 import com.pms.po.Employee;
 import com.pms.po.EmployeeExample;
@@ -36,6 +38,23 @@ public class EmployeeService {
         employeeExample.createCriteria().andE_idEqualTo(employee.getE_id());
         employeeMapper.updateByExample(employee,employeeExample);
     }
+
+
+    public PageInfo listAll(int pagenum,int pagesize){
+        PageHelper.startPage(pagenum,pagesize);
+        List<Employee> employees=employeeMapper.selectByExample(employeeExample);
+        PageInfo pageInfo=new PageInfo(employees);
+        return pageInfo;
+    }
+
+    public void insertEmp(Employee employee){
+        employeeMapper.insertSelective(employee);
+    }
+
+
+
+
+
 
 
 }
